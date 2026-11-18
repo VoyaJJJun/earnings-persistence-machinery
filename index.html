@@ -1,0 +1,1347 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>利润能持续吗｜机械设备行业盈余持续性研究</title>
+  <style>
+    :root {
+      --stage: #07111f;
+      --stage-2: #0b1b2d;
+      --paper: #f4f0e8;
+      --paper-2: #ebe4d8;
+      --ink: #142130;
+      --muted: #5d6874;
+      --line: rgba(20, 33, 48, .16);
+      --cyan: #1b7f82;
+      --cyan-soft: #dbeeed;
+      --gold: #c58a2d;
+      --gold-soft: #f4e7cf;
+      --red: #b64e42;
+      --red-soft: #f4dfdc;
+      --green: #4c7b5b;
+      --green-soft: #dfebe2;
+      --white: #fffaf3;
+      --shadow: 0 28px 80px rgba(0, 0, 0, .34);
+      --sans: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC", system-ui, sans-serif;
+      --serif: "Songti SC", "STSong", "Noto Serif CJK SC", Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+
+    body {
+      color: var(--white);
+      background:
+        radial-gradient(circle at 12% 20%, rgba(27, 127, 130, .24), transparent 34%),
+        radial-gradient(circle at 92% 86%, rgba(197, 138, 45, .16), transparent 30%),
+        linear-gradient(145deg, var(--stage), var(--stage-2));
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    button { font: inherit; }
+
+    .deck {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 2.2vh 3vw 4.2vh;
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      width: min(94vw, calc(91vh * 16 / 9));
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(27, 127, 130, .035) 1px, transparent 1px),
+        linear-gradient(rgba(27, 127, 130, .035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 40px 40px, 40px 40px, auto;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 5.2% 6.2% 4.6%;
+      animation: slideIn .32s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .slide.active { display: grid; grid-template-rows: auto 1fr auto; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(9px) scale(.995); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 10px;
+      background: var(--cyan);
+    }
+
+    .slide[data-tone="gold"]::before { background: var(--gold); }
+    .slide[data-tone="red"]::before { background: var(--red); }
+    .slide[data-tone="green"]::before { background: var(--green); }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      min-height: 12%;
+    }
+
+    .eyebrow {
+      margin: 0 0 .35em;
+      color: var(--cyan);
+      font-size: clamp(10px, 1.05vw, 16px);
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    [data-tone="gold"] .eyebrow { color: #9b681d; }
+    [data-tone="red"] .eyebrow { color: var(--red); }
+    [data-tone="green"] .eyebrow { color: var(--green); }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: .2em;
+      font-family: var(--serif);
+      font-size: clamp(34px, 4.35vw, 74px);
+      line-height: 1.08;
+      letter-spacing: -.03em;
+      font-weight: 800;
+    }
+
+    h2 {
+      margin-bottom: .28em;
+      font-family: var(--serif);
+      font-size: clamp(25px, 3vw, 52px);
+      line-height: 1.13;
+      letter-spacing: -.025em;
+    }
+
+    h3 {
+      margin-bottom: .45em;
+      font-size: clamp(15px, 1.45vw, 23px);
+      line-height: 1.3;
+    }
+
+    .subtitle {
+      max-width: 76%;
+      color: var(--muted);
+      font-size: clamp(13px, 1.35vw, 22px);
+      line-height: 1.55;
+    }
+
+    .section-chip {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.2em;
+      padding: .45em .8em;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: clamp(10px, .85vw, 14px);
+      font-weight: 700;
+      letter-spacing: .08em;
+      background: rgba(255,255,255,.35);
+    }
+
+    .slide-body {
+      min-height: 0;
+      padding-top: 2.4%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #747b82;
+      font-size: clamp(8px, .75vw, 12px);
+      letter-spacing: .03em;
+    }
+
+    .footer-mark { color: var(--cyan); font-weight: 800; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.1%; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.8%; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.4%; }
+    .split-43 { display: grid; grid-template-columns: 1.25fr .8fr; gap: 3%; align-items: stretch; }
+    .split-34 { display: grid; grid-template-columns: .8fr 1.25fr; gap: 3%; align-items: stretch; }
+
+    .card {
+      min-width: 0;
+      padding: 5.2% 5.8%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.48);
+    }
+
+    .card.cyan { background: var(--cyan-soft); border-color: rgba(27,127,130,.18); }
+    .card.gold { background: var(--gold-soft); border-color: rgba(197,138,45,.20); }
+    .card.red { background: var(--red-soft); border-color: rgba(182,78,66,.18); }
+    .card.green { background: var(--green-soft); border-color: rgba(76,123,91,.18); }
+
+    .metric {
+      display: block;
+      margin-bottom: .16em;
+      color: var(--cyan);
+      font-family: var(--serif);
+      font-size: clamp(27px, 3.2vw, 54px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -.04em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric.gold { color: #9b681d; }
+    .metric.red { color: var(--red); }
+    .metric.green { color: var(--green); }
+
+    .metric-label {
+      color: var(--ink);
+      font-size: clamp(12px, 1.12vw, 18px);
+      font-weight: 750;
+      line-height: 1.4;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: clamp(9px, .87vw, 14px);
+      line-height: 1.5;
+    }
+
+    .body-copy {
+      color: #2c3844;
+      font-size: clamp(12px, 1.17vw, 19px);
+      line-height: 1.62;
+    }
+
+    .em { color: var(--cyan); font-weight: 850; }
+    .em-gold { color: #95631a; font-weight: 850; }
+    .em-red { color: var(--red); font-weight: 850; }
+
+    .verdict {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 4.5em;
+      padding: .28em .7em;
+      border-radius: 999px;
+      color: var(--green);
+      background: var(--green-soft);
+      font-weight: 850;
+      font-size: clamp(10px, .9vw, 15px);
+    }
+
+    .verdict.no { color: var(--red); background: var(--red-soft); }
+    .verdict.neutral { color: #8b5e1c; background: var(--gold-soft); }
+
+    .cover {
+      color: var(--white);
+      background:
+        radial-gradient(circle at 84% 14%, rgba(197,138,45,.25), transparent 29%),
+        radial-gradient(circle at 17% 85%, rgba(27,127,130,.30), transparent 35%),
+        linear-gradient(135deg, #071522, #10283b);
+      border-color: rgba(255,255,255,.11);
+    }
+
+    .cover::before { width: 0; }
+
+    .cover .eyebrow { color: #75c1bd; }
+    .cover .subtitle { color: rgba(255,250,243,.72); }
+    .cover .slide-footer { color: rgba(255,250,243,.48); }
+    .cover .section-chip { color: rgba(255,250,243,.72); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.05); }
+
+    .cover-graphic {
+      position: absolute;
+      right: 6.2%;
+      bottom: 12%;
+      width: 35%;
+      height: 54%;
+      opacity: .95;
+    }
+
+    .cover-content { position: relative; z-index: 2; max-width: 68%; align-self: center; }
+
+    .cover-kicker {
+      margin-top: 2.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+    }
+
+    .cover-kicker span {
+      padding: .48em .78em;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      color: rgba(255,250,243,.84);
+      background: rgba(255,255,255,.05);
+      font-size: clamp(10px, .95vw, 15px);
+    }
+
+    .thesis {
+      margin: 0 auto;
+      max-width: 92%;
+      font-family: var(--serif);
+      font-size: clamp(21px, 2.45vw, 42px);
+      line-height: 1.45;
+      text-align: center;
+      font-weight: 760;
+    }
+
+    .thesis b { color: var(--cyan); }
+
+    .decision-card {
+      position: relative;
+      min-height: 100%;
+      padding: 8% 7%;
+      overflow: hidden;
+    }
+
+    .decision-card .index {
+      position: absolute;
+      right: 6%;
+      top: 0;
+      color: rgba(20,33,48,.055);
+      font-family: var(--serif);
+      font-size: clamp(70px, 8vw, 128px);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .decision-card p { position: relative; z-index: 2; margin-bottom: 0; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 1.3%;
+    }
+
+    .flow-arrow {
+      color: var(--cyan);
+      font-size: clamp(25px, 3vw, 50px);
+      font-weight: 300;
+    }
+
+    .formula {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: .55em;
+      padding: .85em 1em;
+      border-radius: 13px;
+      background: #10283b;
+      color: var(--white);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(18px, 2vw, 34px);
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .formula .minus { color: #e1b66e; }
+
+    .sample-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2%;
+      margin-top: 3%;
+    }
+
+    .sample-step {
+      position: relative;
+      padding: 7% 6%;
+      border-top: 3px solid var(--cyan);
+      background: rgba(255,255,255,.45);
+    }
+
+    .sample-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -8%;
+      top: 34%;
+      z-index: 2;
+      color: #96a0a6;
+      font-size: clamp(18px, 2vw, 32px);
+    }
+
+    .rank-list { display: grid; gap: .6rem; }
+
+    .rank-row {
+      display: grid;
+      grid-template-columns: 1.25fr .72fr .72fr 1.8fr;
+      gap: 1rem;
+      align-items: center;
+      padding: .62em .82em;
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(9px, .9vw, 15px);
+    }
+
+    .rank-row.header { color: var(--muted); font-weight: 800; }
+    .rank-row.selected { background: var(--cyan-soft); border-radius: 10px; border-bottom-color: transparent; }
+    .rank-row strong { font-size: 1.08em; }
+
+    .case-metrics .card { padding: 8% 7%; }
+
+    .ratio-line {
+      height: 8px;
+      margin: .7rem 0 .5rem;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #d8d8d3;
+    }
+
+    .ratio-line > span { display: block; height: 100%; border-radius: inherit; background: var(--cyan); }
+
+    .bridge-card { min-height: 215px; display: flex; flex-direction: column; justify-content: space-between; }
+    .bridge-card .big { font-family: var(--serif); font-size: clamp(25px, 3vw, 49px); font-weight: 900; line-height: 1; }
+    .bridge-card .big.red { color: var(--red); }
+    .bridge-card .big.cyan { color: var(--cyan); }
+
+    .bridge-total {
+      margin-top: 2.3%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3%;
+      align-items: center;
+      padding: 1.2% 2%;
+      border-left: 4px solid var(--gold);
+      background: var(--gold-soft);
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.2%;
+      padding-top: 3.5%;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 11%;
+      left: 8%;
+      right: 8%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--red));
+    }
+
+    .time-node { position: relative; padding-top: 8%; }
+    .time-node::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 14px;
+      height: 14px;
+      border: 4px solid var(--paper);
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 0 2px var(--cyan);
+    }
+    .time-node:nth-child(n+2)::before { background: var(--red); box-shadow: 0 0 0 2px var(--red); }
+    .time-year { margin-bottom: .4rem; color: var(--muted); font-size: clamp(12px,1.1vw,18px); font-weight: 850; }
+    .time-main { font-family: var(--serif); font-size: clamp(20px,2.2vw,38px); font-weight: 900; color: var(--ink); }
+    .time-main.negative { color: var(--red); }
+
+    .chart-card { padding: 3.5% 4%; }
+    .chart-title { margin-bottom: .35rem; color: var(--ink); font-size: clamp(12px,1.05vw,17px); font-weight: 850; }
+    .chart-note { margin-bottom: .3rem; color: var(--muted); font-size: clamp(8px,.75vw,12px); }
+    .chart-svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .chart-svg text { font-family: var(--sans); fill: #5d6874; font-size: 12px; }
+    .chart-svg .value { fill: var(--ink); font-size: 13px; font-weight: 800; }
+    .chart-svg .axis { stroke: rgba(20,33,48,.18); stroke-width: 1; }
+    .chart-svg .grid { stroke: rgba(20,33,48,.10); stroke-width: 1; stroke-dasharray: 4 6; }
+    .chart-svg .line-cyan { fill: none; stroke: var(--cyan); stroke-width: 4; }
+    .chart-svg .line-gold { fill: none; stroke: var(--gold); stroke-width: 4; }
+    .chart-svg .line-red { fill: none; stroke: var(--red); stroke-width: 4; }
+    .chart-svg .dot-cyan { fill: var(--paper); stroke: var(--cyan); stroke-width: 4; }
+    .chart-svg .dot-gold { fill: var(--paper); stroke: var(--gold); stroke-width: 4; }
+
+    .legend { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-top: .25rem; color: var(--muted); font-size: clamp(8px,.77vw,12px); }
+    .legend i { display: inline-block; width: 18px; height: 4px; margin-right: .35rem; border-radius: 9px; vertical-align: middle; }
+
+    .hypothesis-card {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      min-height: 255px;
+      padding: 8% 7%;
+    }
+
+    .hypothesis-card .h-code { color: var(--muted); font-size: clamp(10px,.9vw,14px); font-weight: 900; letter-spacing: .14em; }
+    .hypothesis-card .h-result { margin: .45em 0 .35em; font-family: var(--serif); font-size: clamp(28px,3.2vw,53px); font-weight: 900; }
+    .hypothesis-card p { margin-bottom: 0; align-self: end; }
+
+    .bar-chart {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: end;
+      gap: 8%;
+      height: 210px;
+      padding: 20px 8% 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .bar-chart::before {
+      content: "预期：负值";
+      position: absolute;
+      left: 0;
+      bottom: 38%;
+      color: var(--red);
+      font-size: clamp(8px,.75vw,12px);
+      font-weight: 750;
+    }
+
+    .bar {
+      position: relative;
+      height: var(--h);
+      min-height: 20px;
+      border-radius: 8px 8px 0 0;
+      background: linear-gradient(180deg, #37a0a0, var(--cyan));
+    }
+
+    .bar span {
+      position: absolute;
+      left: 50%;
+      top: -1.9em;
+      transform: translateX(-50%);
+      color: var(--ink);
+      font-size: clamp(11px,1vw,16px);
+      font-weight: 900;
+    }
+
+    .bar label {
+      position: absolute;
+      left: 50%;
+      bottom: -2.1em;
+      transform: translateX(-50%);
+      color: var(--muted);
+      font-size: clamp(9px,.85vw,13px);
+      font-weight: 750;
+    }
+
+    .robust-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-size: clamp(9px,.86vw,14px);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .robust-table th, .robust-table td { padding: .65em .75em; text-align: center; border-bottom: 1px solid var(--line); }
+    .robust-table tr:last-child td { border-bottom: 0; }
+    .robust-table th { color: var(--white); background: #173449; font-weight: 800; }
+    .robust-table td:first-child, .robust-table th:first-child { text-align: left; }
+    .robust-table tbody tr:nth-child(even) { background: rgba(27,127,130,.055); }
+    .robust-table .sig { color: var(--cyan); font-weight: 900; }
+
+    .boundary-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .7em; }
+    .boundary-list li { position: relative; padding-left: 1.6em; color: #2f3b45; font-size: clamp(10px,1vw,16px); line-height: 1.48; }
+    .boundary-list li::before { position: absolute; left: 0; top: .05em; font-weight: 900; }
+    .boundary-list.can li::before { content: "✓"; color: var(--green); }
+    .boundary-list.cannot li::before { content: "×"; color: var(--red); }
+
+    .flash-line {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 1.2rem;
+      align-items: start;
+      padding: 2.2% 2.6%;
+      border-bottom: 1px solid var(--line);
+    }
+    .flash-line:last-child { border-bottom: 0; }
+    .flash-no { color: var(--cyan); font-family: var(--serif); font-size: clamp(28px,3vw,50px); font-weight: 900; line-height: 1; }
+    .flash-line p { margin: 0; color: var(--ink); font-size: clamp(14px,1.35vw,22px); line-height: 1.5; font-weight: 700; }
+
+    .compact-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: clamp(8px,.72vw,12px);
+      line-height: 1.35;
+    }
+    .compact-table th, .compact-table td { padding: .45em .55em; border-bottom: 1px solid var(--line); text-align: left; }
+    .compact-table th { color: var(--muted); font-weight: 850; }
+    .compact-table tr.highlight { background: var(--cyan-soft); }
+    .compact-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    .source-note { margin-top: 1.1%; color: #707881; font-size: clamp(7px,.68vw,11px); line-height: 1.4; }
+
+    .speaker-note { display: none; }
+
+    .notes-panel {
+      display: none;
+      position: fixed;
+      z-index: 40;
+      left: 50%;
+      bottom: 5.5vh;
+      width: min(860px, 88vw);
+      max-height: 28vh;
+      padding: 1rem 1.2rem;
+      overflow: auto;
+      transform: translateX(-50%);
+      color: #f7f1e6;
+      background: rgba(5, 15, 25, .94);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 14px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    body.notes-on .notes-panel { display: block; }
+    .notes-panel b { color: #7fc6c2; }
+
+    .controls {
+      position: fixed;
+      z-index: 50;
+      right: 2vw;
+      bottom: 1.2vh;
+      display: flex;
+      gap: .45rem;
+      opacity: .22;
+      transition: opacity .2s;
+    }
+    .controls:hover, .controls:focus-within { opacity: 1; }
+    .control-btn {
+      width: 36px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .control-btn:hover { background: rgba(255,255,255,.16); }
+
+    .progress {
+      position: fixed;
+      z-index: 45;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,.08);
+    }
+    .progress > span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #58aaa7, #e3b463); transition: width .25s ease; }
+
+    .slide-counter {
+      position: fixed;
+      z-index: 45;
+      left: 2vw;
+      bottom: 1.25vh;
+      color: rgba(255,255,255,.52);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .toast {
+      position: fixed;
+      z-index: 60;
+      left: 50%;
+      bottom: 6.5vh;
+      padding: .65rem 1rem;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,.88);
+      background: rgba(4,12,20,.88);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s;
+    }
+    .toast.show { opacity: 1; }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 70;
+      inset: 0;
+      place-items: center;
+      padding: 4vh 4vw;
+      background: rgba(3,10,17,.78);
+      backdrop-filter: blur(10px);
+    }
+    .modal.open { display: grid; }
+    .modal-card {
+      width: min(980px, 92vw);
+      max-height: 84vh;
+      overflow: auto;
+      padding: 2rem;
+      color: var(--ink);
+      background: var(--paper);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    .modal-card h3 { font-family: var(--serif); font-size: 28px; }
+    .overview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .overview-item {
+      min-height: 112px;
+      padding: .9rem;
+      color: var(--ink);
+      background: #fffaf3;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .overview-item.current { border: 2px solid var(--cyan); background: var(--cyan-soft); }
+    .overview-item small { display: block; margin-bottom: .5rem; color: var(--muted); }
+    .overview-item strong { display: block; line-height: 1.35; }
+    .help-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .8rem 2rem; }
+    .shortcut { display: flex; justify-content: space-between; gap: 1rem; padding: .65rem 0; border-bottom: 1px solid var(--line); }
+    kbd { min-width: 4.5em; padding: .18em .45em; color: var(--white); background: #183246; border-radius: 5px; text-align: center; font: 700 12px var(--sans); }
+
+    @media (max-aspect-ratio: 4/3) {
+      .deck { padding: 1.5vh 1.5vw 5vh; }
+      .slide { width: 97vw; border-radius: 12px; }
+    }
+
+    @media (max-width: 820px) {
+      .overview-grid { grid-template-columns: repeat(2, 1fr); }
+      .controls { opacity: .8; }
+    }
+
+    @media print {
+      @page { size: A4 landscape; margin: 0; }
+      html, body { height: auto; overflow: visible; background: #fff; }
+      .deck { position: static; display: block; padding: 0; }
+      .slide, .slide.active {
+        display: grid !important;
+        width: 297mm;
+        height: 210mm;
+        aspect-ratio: auto;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        page-break-after: always;
+        animation: none;
+      }
+      .controls, .progress, .slide-counter, .toast, .modal, .notes-panel { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-live="polite">
+    <section class="slide cover active" data-title="封面" data-section="开场">
+      <div class="slide-header">
+        <div><p class="eyebrow">财报分析专题三 · F3–F6 小组作业</p></div>
+        <span class="section-chip">机械设备行业 · 2014–2024</span>
+      </div>
+      <div class="slide-body">
+        <div class="cover-content">
+          <h1>利润能持续吗</h1>
+          <p class="subtitle">机械设备行业盈余持续性、现金构成与应计构成的联合检验</p>
+          <div class="cover-kicker">
+            <span>541 家公司</span><span>5,105 个公司年度</span><span>6 个共同基准回归</span>
+          </div>
+        </div>
+        <svg class="cover-graphic" viewBox="0 0 520 360" aria-hidden="true">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#62bbb6"/><stop offset="1" stop-color="#dcae5f"/></linearGradient>
+          </defs>
+          <path d="M22 303 H500" stroke="rgba(255,255,255,.18)"/>
+          <path d="M40 290 C120 255, 168 276, 225 208 S360 173, 472 78" fill="none" stroke="url(#g1)" stroke-width="8" stroke-linecap="round"/>
+          <path d="M40 290 C120 255, 168 276, 225 208 S360 173, 472 78 L472 304 L40 304Z" fill="url(#g1)" opacity=".08"/>
+          <g fill="#0d2233" stroke="#75c1bd" stroke-width="5">
+            <circle cx="40" cy="290" r="11"/><circle cx="225" cy="208" r="11"/><circle cx="472" cy="78" r="11"/>
+          </g>
+          <text x="40" y="338" fill="rgba(255,255,255,.5)" font-size="18" font-family="sans-serif">案例</text>
+          <text x="212" y="338" fill="rgba(255,255,255,.5)" font-size="18" font-family="sans-serif">机制</text>
+          <text x="446" y="338" fill="rgba(255,255,255,.5)" font-size="18" font-family="sans-serif">证据</text>
+        </svg>
+      </div>
+      <div class="slide-footer">
+        <span>汪舒婷 · 楚慧凌 · 吴越 · 毛静玲</span>
+        <span>按 → 或空格开始</span>
+      </div>
+      <aside class="speaker-note"><b>开场：</b>我们的问题很简单：今天赚到的利润，明天还能不能延续？我们从一家公司出发，再用机械设备行业 541 家公司的面板数据检验。今天最重要的不是“结果都显著”，而是案例机制与全样本证据并不完全一致。</aside>
+    </section>
+
+    <section class="slide" data-title="先给结论" data-section="结论" data-tone="green">
+      <div class="slide-header">
+        <div><p class="eyebrow">Executive summary</p><h2>先给结论：两项成立，两项没有</h2></div>
+        <span class="section-chip">01 / 结论地图</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-4" style="height:66%">
+          <article class="card decision-card green">
+            <span class="index">1</span><span class="verdict">H1 成立</span>
+            <h3 style="margin-top:1.1rem">盈余能延续，但会衰减</h3>
+            <p class="small">持续性系数从下一年的 <b>0.677</b> 降到第三年的 <b>0.421</b>。</p>
+          </article>
+          <article class="card decision-card cyan">
+            <span class="index">2</span><span class="verdict">H2 成立</span>
+            <h3 style="margin-top:1.1rem">现金比应计更“耐久”</h3>
+            <p class="small">现金构成持续性始终更高，差值约 <b>0.16–0.19</b>。</p>
+          </article>
+          <article class="card decision-card gold">
+            <span class="index">3</span><span class="verdict neutral">H3 未支持</span>
+            <h3 style="margin-top:1.1rem">差距没有随期限扩大</h3>
+            <p class="small">h=1 到 h=3 的差值变化 −0.022，<b>p=0.217</b>。</p>
+          </article>
+          <article class="card decision-card red">
+            <span class="index">4</span><span class="verdict no">拓展被拒绝</span>
+            <h3 style="margin-top:1.1rem">应收增长的方向相反</h3>
+            <p class="small">ACC×ΔAR 在短期显著为正，而不是预期的负值。</p>
+          </article>
+        </div>
+        <p class="thesis" style="margin-top:3.2%">案例让我们<b>看见机制</b>；面板回归判断它能否<b>推广</b>。</p>
+      </div>
+      <div class="slide-footer"><span>核心结论</span><span class="footer-mark">FINANCIAL STATEMENT ANALYSIS</span></div>
+      <aside class="speaker-note"><b>这一页建议 45 秒。</b>先把四个判断一次说完。前三个来自共同基准，第四个来自本组拓展。后面所有页都是在回答：为什么得到这四个判断、它们各自能说明什么。</aside>
+    </section>
+
+    <section class="slide" data-title="样本与识别框架" data-section="研究设计">
+      <div class="slide-header">
+        <div><p class="eyebrow">Research design</p><h2>同一个问题，用三种视角回答</h2></div>
+        <span class="section-chip">02 / 框架</span>
+      </div>
+      <div class="slide-body">
+        <div class="flow">
+          <article class="card cyan"><span class="metric">1 家</span><h3>异常案例</h3><p class="small">亿嘉和 2021 年<br>解释三张表如何联动</p></article>
+          <span class="flow-arrow">→</span>
+          <article class="card gold"><span class="metric gold">541 家</span><h3>行业面板</h3><p class="small">申万机械设备当前成员<br>2014–2024 年</p></article>
+          <span class="flow-arrow">→</span>
+          <article class="card green"><span class="metric green">6 个</span><h3>共同基准回归</h3><p class="small">h=1、2、3<br>总体与分解模型各三次</p></article>
+        </div>
+        <div class="sample-flow">
+          <article class="sample-step"><span class="metric">5,302</span><p class="metric-label">三表可取</p></article>
+          <article class="sample-step"><span class="metric">5,105</span><p class="metric-label">平均总资产有效</p></article>
+          <article class="sample-step"><span class="metric gold">5,093</span><p class="metric-label">h=1 样本</p></article>
+          <article class="sample-step"><span class="metric red">4,017</span><p class="metric-label">h=3 样本</p></article>
+        </div>
+      </div>
+      <div class="slide-footer"><span>样本不填补缺失值；变量按年 1% / 99% 缩尾</span><span class="footer-mark">541 COMPANIES</span></div>
+      <aside class="speaker-note"><b>讲法：</b>案例解决“怎么发生”，面板解决“是否普遍”。共同基准用 5,105 个公司年度；预测期限越长，可用样本自然下降。所有缺失值都不填补，极端值按年缩尾，不删除。</aside>
+    </section>
+
+    <section class="slide" data-title="变量与模型" data-section="研究设计" data-tone="gold">
+      <div class="slide-header">
+        <div><p class="eyebrow">Measurement</p><h2>把盈余拆开：现金构成 + 应计构成</h2></div>
+        <span class="section-chip">03 / 变量口径</span>
+      </div>
+      <div class="slide-body">
+        <div class="split-43">
+          <div>
+            <div class="formula"><span>E</span><span>=</span><span>CF</span><span class="minus">+</span><span>ACC</span></div>
+            <div class="grid-3" style="margin-top:2.5%">
+              <article class="card"><h3>E</h3><p class="small">净利润 ÷ 平均总资产</p></article>
+              <article class="card cyan"><h3>CF</h3><p class="small">经营现金流 ÷ 平均总资产</p></article>
+              <article class="card gold"><h3>ACC</h3><p class="small">E − CF</p></article>
+            </div>
+          </div>
+          <article class="card" style="display:flex;flex-direction:column;justify-content:center">
+            <p class="eyebrow">模型二</p>
+            <p class="body-copy" style="font-family:Georgia,serif;font-size:clamp(15px,1.45vw,24px);line-height:1.7">E<sub>t+h</sub> = α + β<sub>C</sub>CF<sub>t</sub> + β<sub>A</sub>ACC<sub>t</sub> + 年份固定效应 + ε</p>
+            <p class="small">关键检验：<b>β<sub>C</sub> − β<sub>A</sub> 是否大于 0</b><br>标准误按公司聚类；h = 1、2、3。</p>
+          </article>
+        </div>
+        <p class="body-copy" style="margin:2.8% 0 0;text-align:center"><span class="em">不是</span>比较“谁显著、谁不显著”，而是直接对两个系数之差做 Wald 检验。</p>
+      </div>
+      <div class="slide-footer"><span>共同基准：年份固定效应 · 公司聚类标准误 · 不加控制变量</span><span class="footer-mark">E = CF + ACC</span></div>
+      <aside class="speaker-note"><b>关键解释：</b>E 是资产收益率；CF 是现金支撑的部分；ACC 是净利润和现金流之间的差额。H2 的统计判断不是肉眼比较两个星号，而是检验 βC 与 βA 的差值。</aside>
+    </section>
+
+    <section class="slide" data-title="为什么选亿嘉和" data-section="F3 候选筛选">
+      <div class="slide-header">
+        <div><p class="eyebrow">F3 · Screening</p><h2>8 个候选中，亿嘉和的机制最“干净”</h2></div>
+        <span class="section-chip">04 / 案例筛选</span>
+      </div>
+      <div class="slide-body">
+        <div class="split-43">
+          <div class="rank-list">
+            <div class="rank-row header"><span>候选</span><span>ACC</span><span>应收增速</span><span>取舍</span></div>
+            <div class="rank-row"><strong>*ST威领</strong><span>0.087</span><span>+28.8%</span><span>收入基数崩塌，分母效应</span></div>
+            <div class="rank-row"><strong>思林杰</strong><span>0.209</span><span>+117.6%</span><span>信号清楚，但属于上市前年度</span></div>
+            <div class="rank-row selected"><strong>亿嘉和</strong><span><b>0.185</b></span><span><b>+127.7%</b></span><span><b>入选：收入增长、现金流转负</b></span></div>
+            <div class="rank-row"><strong>智立方</strong><span>0.272</span><span>+115.2%</span><span>上市前年度，后续盈余仍为正</span></div>
+          </div>
+          <article class="card cyan" style="display:flex;flex-direction:column;justify-content:center">
+            <p class="eyebrow">入选逻辑</p>
+            <h3>四个信号指向同一条链</h3>
+            <p class="body-copy" style="margin-bottom:.5rem"><b>收入仍增长</b> → <b>应收翻倍</b> → <b>现金流转负</b> → <b>后续盈余反转</b></p>
+            <p class="small">只描述盈余未延续与可能的会计机制；<b>不作财务造假判断</b>。</p>
+          </article>
+        </div>
+        <div class="grid-3" style="margin-top:2.2%">
+          <div class="card"><b>高应计</b><p class="small">同年行业 ACC 前 10%，且 ACC &gt; 0</p></div>
+          <div class="card"><b>可观察</b><p class="small">t+1 至 t+3 的 E 均非缺失</p></div>
+          <div class="card"><b>确有反转</b><p class="small">E<sub>t</sub> 高于 E<sub>t+3</sub></p></div>
+        </div>
+      </div>
+      <div class="slide-footer"><span>同一公司只保留信号最强的一年</span><span class="footer-mark">SELECTED · 603666</span></div>
+      <aside class="speaker-note"><b>讲法：</b>筛选不是先看新闻再找数字，而是按年用行业 90% 分位筛高应计，并要求后三年可观察且盈余确实下降。亿嘉和的优势是四个信号相互对应，替代机制相对少。</aside>
+    </section>
+
+    <section class="slide" data-title="2021 年异常画像" data-section="F4 案例" data-tone="red">
+      <div class="slide-header">
+        <div><p class="eyebrow">F4 · Case snapshot</p><h2>2021：利润向上，现金向下</h2></div>
+        <span class="section-chip">05 / 亿嘉和</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-4 case-metrics">
+          <article class="card green"><span class="metric green">+27.8%</span><p class="metric-label">营业收入增速</p><p class="small">收入 12.85 亿元</p></article>
+          <article class="card gold"><span class="metric gold">+127.7%</span><p class="metric-label">应收账款增速</p><p class="small">应收升至 7.57 亿元</p></article>
+          <article class="card cyan"><span class="metric">4.84 亿</span><p class="metric-label">净利润</p><p class="small">同比增长 44.2%</p></article>
+          <article class="card red"><span class="metric red">−0.11 亿</span><p class="metric-label">经营现金流</p><p class="small">上年为 +0.67 亿元</p></article>
+        </div>
+        <div class="split-34" style="margin-top:2.7%">
+          <article class="card">
+            <p class="small" style="margin-bottom:.2rem">应收账款 / 营业收入</p>
+            <div style="display:flex;justify-content:space-between"><b>2020 · 33%</b><b class="em-red">2021 · 59%</b></div>
+            <div class="ratio-line"><span style="width:59%"></span></div>
+            <p class="small">应收增速约为收入增速的 <b>4.6 倍</b></p>
+          </article>
+          <article class="card cyan">
+            <h3>异常不在利润“太高”</h3>
+            <p class="body-copy" style="margin-bottom:0">而在利润与现金的方向相反，并且能在资产负债表中找到明确对应项。</p>
+          </article>
+        </div>
+      </div>
+      <div class="slide-footer"><span>应计占平均总资产 18.5%；同年行业 90% 分位为 10.5%</span><span class="footer-mark">PROFIT ≠ CASH</span></div>
+      <aside class="speaker-note"><b>这一页是案例记忆点。</b>请停顿着报四个数字：收入增长 27.8%，应收增长 127.7%，净利润 4.84 亿，经营现金流却是负 0.11 亿。异常的核心不是“高利润”，而是利润与现金的背离。</aside>
+    </section>
+
+    <section class="slide" data-title="三张表如何勾稽" data-section="F4 案例">
+      <div class="slide-header">
+        <div><p class="eyebrow">Three-statement bridge</p><h2>三张表讲的是同一件事</h2></div>
+        <span class="section-chip">06 / 勾稽关系</span>
+      </div>
+      <div class="slide-body">
+        <div class="flow">
+          <article class="card bridge-card green">
+            <div><p class="eyebrow">利润表</p><h3>收入与利润已确认</h3></div>
+            <div><span class="big">4.84 亿</span><p class="small">2021 年净利润</p></div>
+          </article>
+          <span class="flow-arrow">→</span>
+          <article class="card bridge-card gold">
+            <div><p class="eyebrow">资产负债表</p><h3>尚未收回的对价挂账</h3></div>
+            <div><span class="big cyan">+4.49 亿</span><p class="small">应收账款 + 合同资产增加</p></div>
+          </article>
+          <span class="flow-arrow">→</span>
+          <article class="card bridge-card red">
+            <div><p class="eyebrow">现金流量表</p><h3>利润尚未转成现金</h3></div>
+            <div><span class="big red">−0.11 亿</span><p class="small">经营现金流净额</p></div>
+          </article>
+        </div>
+        <div class="bridge-total">
+          <div><b>净利润 − 经营现金流 = 4.95 亿元</b><p class="small" style="margin:.2rem 0 0">其中经营性应收增加可解释 4.49 亿元：应收 +4.25 亿，合同资产 +0.24 亿。</p></div>
+          <span class="metric gold" style="margin:0">91%</span>
+        </div>
+      </div>
+      <div class="slide-footer"><span>账上多的不是凭空利润，而是一笔尚未兑现的收款权</span><span class="footer-mark">91% EXPLAINED</span></div>
+      <aside class="speaker-note"><b>机制：</b>客户验收时先确认收入，但电网结算和付款更晚，因此资产负债表上形成应收和合同资产；现金流量表没有同步流入。4.95 亿的利润现金差额中，91% 可以由经营性应收增加解释。</aside>
+    </section>
+
+    <section class="slide" data-title="后来发生了什么" data-section="F4 案例" data-tone="red">
+      <div class="slide-header">
+        <div><p class="eyebrow">Ex post outcome</p><h2>后来三年：收入腰斩，连续亏损，减值落地</h2></div>
+        <span class="section-chip">07 / 后续验证</span>
+      </div>
+      <div class="slide-body">
+        <div class="timeline">
+          <article class="time-node card cyan"><p class="time-year">2021 · 报告期</p><div class="time-main">+4.84 亿</div><p class="small">净利润<br>收入 12.85 亿</p></article>
+          <article class="time-node card red"><p class="time-year">2022</p><div class="time-main negative">−0.98 亿</div><p class="small">收入下降 48%<br>信用减值 −0.36 亿</p></article>
+          <article class="time-node card red"><p class="time-year">2023</p><div class="time-main negative">−0.10 亿</div><p class="small">仍处亏损<br>盈余未恢复</p></article>
+          <article class="time-node card red"><p class="time-year">2024</p><div class="time-main negative">−2.20 亿</div><p class="small">两项减值合计 −0.59 亿<br>收入 5.85 亿</p></article>
+        </div>
+        <div class="grid-2" style="margin-top:2.6%">
+          <article class="card gold"><h3>支持案例判断</h3><p class="small">盈余确实没有延续，并以“收入下滑 + 减值”的形式反转。</p></article>
+          <article class="card"><h3>但不是唯一解释</h3><p class="small">2022 年经营现金流转正，行业需求周期也同步回落；不能把全部反转都归因于应收。</p></article>
+        </div>
+      </div>
+      <div class="slide-footer"><span>案例提供机制线索，不提供因果证明</span><span class="footer-mark">2021 → 2024</span></div>
+      <aside class="speaker-note"><b>边界：</b>后续结果与当时的风险判断同方向，但也有反证：2022 年现金流改善，说明并不是“应收完全收不回来”；行业周期回落也可能解释一部分收入下降。因此案例只能说明机制如何发生，不能证明它是唯一原因。</aside>
+    </section>
+
+    <section class="slide" data-title="共同基准结果" data-section="F6 实证">
+      <div class="slide-header">
+        <div><p class="eyebrow">F6 · Baseline regressions</p><h2>持续性随期限下降，现金始终高于应计</h2></div>
+        <span class="section-chip">08 / 6 个回归</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <article class="card chart-card">
+            <p class="chart-title">模型一 · 总体盈余持续性 β</p><p class="chart-note">E<sub>t+h</sub> 对 E<sub>t</sub> 的回归</p>
+            <svg class="chart-svg" viewBox="0 0 460 240" role="img" aria-label="总体持续性从0.677下降到0.421">
+              <path class="grid" d="M52 38H430 M52 96H430 M52 154H430"/><path class="axis" d="M52 200H430 M52 28V200"/>
+              <text x="18" y="42">0.8</text><text x="18" y="100">0.6</text><text x="18" y="158">0.4</text><text x="18" y="204">0.2</text>
+              <path class="line-cyan" d="M100 72 L240 114 L380 146"/>
+              <circle class="dot-cyan" cx="100" cy="72" r="8"/><circle class="dot-cyan" cx="240" cy="114" r="8"/><circle class="dot-cyan" cx="380" cy="146" r="8"/>
+              <text class="value" x="80" y="54">0.677</text><text class="value" x="220" y="96">0.533</text><text class="value" x="360" y="128">0.421</text>
+              <text x="86" y="224">h=1</text><text x="226" y="224">h=2</text><text x="366" y="224">h=3</text>
+            </svg>
+          </article>
+          <article class="card chart-card">
+            <p class="chart-title">模型二 · 现金构成 vs 应计构成</p><p class="chart-note">β<sub>C</sub> 与 β<sub>A</sub>；差值均在 1% 水平显著</p>
+            <svg class="chart-svg" viewBox="0 0 460 240" role="img" aria-label="现金构成持续性始终高于应计构成">
+              <path class="grid" d="M52 38H430 M52 96H430 M52 154H430"/><path class="axis" d="M52 200H430 M52 28V200"/>
+              <text x="18" y="42">0.8</text><text x="18" y="100">0.6</text><text x="18" y="158">0.4</text><text x="18" y="204">0.2</text>
+              <path class="line-cyan" d="M100 54 L240 93 L380 129"/><path class="line-gold" d="M100 106 L240 146 L380 174"/>
+              <circle class="dot-cyan" cx="100" cy="54" r="7"/><circle class="dot-cyan" cx="240" cy="93" r="7"/><circle class="dot-cyan" cx="380" cy="129" r="7"/>
+              <circle class="dot-gold" cx="100" cy="106" r="7"/><circle class="dot-gold" cx="240" cy="146" r="7"/><circle class="dot-gold" cx="380" cy="174" r="7"/>
+              <text class="value" x="78" y="40">.746</text><text class="value" x="220" y="79">.613</text><text class="value" x="360" y="115">.489</text>
+              <text class="value" x="78" y="132">.566</text><text class="value" x="220" y="171">.427</text><text class="value" x="360" y="198">.331</text>
+              <text x="86" y="224">h=1</text><text x="226" y="224">h=2</text><text x="366" y="224">h=3</text>
+            </svg>
+            <div class="legend"><span><i style="background:var(--cyan)"></i>现金构成 βC</span><span><i style="background:var(--gold)"></i>应计构成 βA</span></div>
+          </article>
+        </div>
+      </div>
+      <div class="slide-footer"><span>所有主系数均在 1% 水平显著</span><span class="footer-mark">H1 ✓ · H2 ✓</span></div>
+      <aside class="speaker-note"><b>读图：</b>左图回答 H1：本期盈余对未来有信息，但期限越长系数越低。右图回答 H2：无论预测一年、两年还是三年，现金构成的线都在应计构成上方，且差值经过 Wald 检验显著。</aside>
+    </section>
+
+    <section class="slide" data-title="三个假设的判定" data-section="F6 实证" data-tone="green">
+      <div class="slide-header">
+        <div><p class="eyebrow">Hypothesis decisions</p><h2>显著不等于“全部符合预期”</h2></div>
+        <span class="section-chip">09 / H1–H3</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-3">
+          <article class="card hypothesis-card green"><span class="h-code">H1 · 盈余持续性</span><div class="h-result" style="color:var(--green)">成立</div><p class="small">β = 0.677 → 0.421<br>均 p&lt;0.001，且随期限衰减。</p></article>
+          <article class="card hypothesis-card cyan"><span class="h-code">H2 · 现金 &gt; 应计</span><div class="h-result" style="color:var(--cyan)">成立</div><p class="small">差值 = 0.181 / 0.187 / 0.158<br>均 p&lt;0.001。</p></article>
+          <article class="card hypothesis-card gold"><span class="h-code">H3 · 差距随期限变化</span><div class="h-result" style="color:#95631a">未支持</div><p class="small">差值变化 = −0.022<br>t=−1.24，p=0.217。</p></article>
+        </div>
+        <p class="thesis" style="margin-top:3%">应计与现金的差距是<b>稳定存在</b>，而不是随预测期限拉长而明显扩大。</p>
+      </div>
+      <div class="slide-footer"><span>负结果被完整保留</span><span class="footer-mark">NO CHERRY-PICKING</span></div>
+      <aside class="speaker-note"><b>重点放在 H3：</b>差值从 0.181 变成 0.158，看起来下降，但统计上不能拒绝两个期限的差值相等。因此不能说“应计反转主要发生在短期”。这正是负结果的价值。</aside>
+    </section>
+
+    <section class="slide" data-title="拓展假设被拒绝" data-section="F6 拓展" data-tone="red">
+      <div class="slide-header">
+        <div><p class="eyebrow">Extension test</p><h2>最意外的结果：交互项方向与预期相反</h2></div>
+        <span class="section-chip">10 / ACC × ΔAR</span>
+      </div>
+      <div class="slide-body">
+        <div class="split-34">
+          <article class="card chart-card">
+            <p class="chart-title">ACC × ΔAR 的系数</p>
+            <div class="bar-chart" aria-label="交互项系数均为正">
+              <div class="bar" style="--h:84%"><span>+0.926***</span><label>h=1</label></div>
+              <div class="bar" style="--h:73%"><span>+0.803**</span><label>h=2</label></div>
+              <div class="bar" style="--h:36%"><span>+0.399</span><label>h=3</label></div>
+            </div>
+            <p class="source-note">预期方向为负；实际短期显著为正，h=3 为正但不显著。</p>
+          </article>
+          <div style="display:grid;gap:1.2%">
+            <article class="card red"><h3>判定：拓展假设被拒绝</h3><p class="small">没有改动假设，也没有因为符号“不好看”而换掉度量。</p></article>
+            <article class="card"><h3>可能解释 1 · 经营信息</h3><p class="small">制造业应收增长可能代表已交付待结算的订单，短期反而含有后续收入信息。</p></article>
+            <article class="card"><h3>可能解释 2 · ACC 口径较宽</h3><p class="small">ACC 还包含折旧、减值、利息、投资收益等，交互项可能捕捉重资产扩张特征。</p></article>
+            <article class="card"><h3>可能解释 3 · 样本与期限</h3><p class="small">单行业、9 个报告期；h=3 已不显著，不宜外推。</p></article>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer"><span>两种替代度量复核后，短期仍为正</span><span class="footer-mark">HYPOTHESIS REJECTED</span></div>
+      <aside class="speaker-note"><b>这一页是汇报亮点。</b>案例里“应收先行”看起来像低质量盈余，但全样本交互项却为正。我们按照事前约定判定假设被拒绝。可能原因有三类，但只能解释，不能说已证明。</aside>
+    </section>
+
+    <section class="slide" data-title="稳健性检查" data-section="F6 稳健性">
+      <div class="slide-header">
+        <div><p class="eyebrow">Robustness</p><h2>换固定效应、换样本、换聚类，H2 方向不变</h2></div>
+        <span class="section-chip">11 / βC − βA</span>
+      </div>
+      <div class="slide-body">
+        <table class="robust-table" aria-label="四项稳健性检查">
+          <thead><tr><th>设定</th><th>回答的问题</th><th>h=1</th><th>h=2</th><th>h=3</th><th>N（h=1）</th></tr></thead>
+          <tbody>
+            <tr><td><b>基准</b></td><td>共同基准</td><td class="sig">0.181***</td><td class="sig">0.187***</td><td class="sig">0.158***</td><td>5,093</td></tr>
+            <tr><td><b>公司固定效应</b></td><td>是否只是公司间长期差异</td><td class="sig">0.153***</td><td class="sig">0.120***</td><td class="sig">0.055***</td><td>5,093</td></tr>
+            <tr><td><b>三期限共同样本</b></td><td>是否只是样本构成变化</td><td class="sig">0.185***</td><td class="sig">0.190***</td><td class="sig">0.158***</td><td>4,003</td></tr>
+            <tr><td><b>剔除 2018–2021</b></td><td>是否由准则换版断点驱动</td><td class="sig">0.151***</td><td class="sig">0.181***</td><td class="sig">0.168***</td><td>3,069</td></tr>
+            <tr><td><b>公司与年份双向聚类</b></td><td>年份内相关是否低估标准误</td><td class="sig">0.181***</td><td class="sig">0.187***</td><td class="sig">0.158***</td><td>5,093</td></tr>
+          </tbody>
+        </table>
+        <div class="grid-2" style="margin-top:2.2%">
+          <article class="card cyan"><h3>稳健的部分</h3><p class="small">βC−βA 始终为正且显著，H2 的方向不变。</p></article>
+          <article class="card gold"><h3>需要注意的部分</h3><p class="small">加入公司固定效应后，h=3 的差值降至 0.055，长期差异有相当部分来自公司间特征。</p></article>
+        </div>
+      </div>
+      <div class="slide-footer"><span>*** 表示 1% 水平显著</span><span class="footer-mark">ROBUST, NOT CAUSAL</span></div>
+      <aside class="speaker-note"><b>不要逐行念表。</b>一句话说方向不变，再指出公司固定效应下长期差值明显缩小。这告诉我们：结论稳健，但持续性有相当一部分来自公司之间长期不同，而不是同一家公司内部的纯时间变化。</aside>
+    </section>
+
+    <section class="slide" data-title="结论边界" data-section="结论" data-tone="gold">
+      <div class="slide-header">
+        <div><p class="eyebrow">What the evidence says</p><h2>能说什么，也要说清不能说什么</h2></div>
+        <span class="section-chip">12 / 结论边界</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <article class="card green">
+            <h3 style="color:var(--green)">证据能支持</h3>
+            <ul class="boundary-list can">
+              <li>机械设备行业盈余具有显著正持续性，且随期限衰减。</li>
+              <li>现金构成的持续性高于应计构成，差值约 0.16–0.19。</li>
+              <li>上述方向在多项稳健性设定下保持。</li>
+            </ul>
+          </article>
+          <article class="card red">
+            <h3 style="color:var(--red)">证据不能回答</h3>
+            <ul class="boundary-list cannot">
+              <li>不能区分低持续性来自估计误差、经营周期还是盈余管理。</li>
+              <li>不能外推到其他行业，也不能把 β 当作单家公司属性。</li>
+              <li>不能宣称因果；拓展假设被拒绝，案例链条无法推广。</li>
+            </ul>
+          </article>
+        </div>
+        <p class="thesis" style="margin-top:3%">最有信息量的地方，不是让案例和回归“对上”，而是看见它们<b>各自负责回答什么</b>。</p>
+      </div>
+      <div class="slide-footer"><span>第三方接口使用调整后数；与首次披露版的已知差异已披露</span><span class="footer-mark">BOUNDARIES MATTER</span></div>
+      <aside class="speaker-note"><b>收束：</b>主结论是相关性而不是因果。案例里的应收链条在单家公司身上成立，但全行业的拓展检验不支持。我们不强行让二者一致，因为案例和面板本来就承担不同任务。</aside>
+    </section>
+
+    <section class="slide" data-title="60 秒快闪" data-section="结尾" data-tone="green">
+      <div class="slide-header">
+        <div><p class="eyebrow">60-second recap</p><h2>如果只记住三句话</h2></div>
+        <span class="section-chip">13 / 快闪发言</span>
+      </div>
+      <div class="slide-body">
+        <div class="card" style="padding:1.2% 2%">
+          <div class="flash-line"><span class="flash-no">01</span><p>2021 年亿嘉和收入增长 <span class="em">27.8%</span>、净利润 <span class="em">4.84 亿元</span>，经营现金流却是 <span class="em-red">−0.11 亿元</span>；应收账款一年翻倍。</p></div>
+          <div class="flash-line"><span class="flash-no">02</span><p>机制是“<span class="em">验收确认在前，结算回款在后</span>”：利润先落地，对价挂在应收和合同资产上，能否回收决定利润能否延续。</p></div>
+          <div class="flash-line"><span class="flash-no">03</span><p>全样本证明“<span class="em">现金比应计更持久</span>”，但没有证明“应收增长会削弱应计持续性”——拓展结果短期反而显著为正。</p></div>
+        </div>
+      </div>
+      <div class="slide-footer"><span>谢谢 · Q&amp;A（附录页可用 O 键快速跳转）</span><span class="footer-mark">CASE ≠ GENERAL RULE</span></div>
+      <aside class="speaker-note"><b>结尾可直接照着这三句说。</b>最后停在“案例不等于一般规律”，然后进入提问。按 O 可以快速跳到附录；按 N 可随时显示本页讲稿提示。</aside>
+    </section>
+
+    <section class="slide" data-title="附录：数据口径" data-section="附录 A">
+      <div class="slide-header">
+        <div><p class="eyebrow">Appendix A</p><h2>数据来源、变量定义与口径差异</h2></div>
+        <span class="section-chip">A1 / Data</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <article class="card cyan"><h3>实际数据接口</h3><p class="body-copy">新浪财经三表接口（akshare 封装）<br>申万行业成分接口：801890</p><p class="small">课程参考接口为 Tushare Pro；因未取得令牌，按口径说明允许的替代接口方案执行。</p></article>
+          <article class="card gold"><h3>三项已知差异</h3><ul class="boundary-list cannot"><li>最近年报中的调整后数，而非首次披露版。</li><li>无 report_type、comp_type 字段二次筛选。</li><li>无 list_date，以最早可得年报近似上市起点。</li></ul></article>
+        </div>
+        <table class="compact-table" style="margin-top:2%">
+          <thead><tr><th>变量</th><th>定义</th><th>原字段</th><th>Tushare 对应字段</th></tr></thead>
+          <tbody><tr><td><b>E</b></td><td>NI / AvgTA</td><td>净利润、资产总计</td><td>n_income / total_assets</td></tr><tr><td><b>CF</b></td><td>CFO / AvgTA</td><td>经营活动现金流量净额</td><td>n_cashflow_act</td></tr><tr><td><b>ACC</b></td><td>E − CF</td><td>由 E、CF 换算</td><td>—</td></tr><tr><td><b>ΔAR</b></td><td>(AR<sub>t</sub> − AR<sub>t−1</sub>) / AvgTA</td><td>应收账款</td><td>accounts_receiv</td></tr></tbody>
+        </table>
+      </div>
+      <div class="slide-footer"><span>取数日期：2026-11-12</span><span class="footer-mark">APPENDIX</span></div>
+      <aside class="speaker-note"><b>答疑用：</b>如果老师问为什么没用 Tushare，说明课程口径允许替代接口，但必须写清原字段、完成数据核对并披露差异；三项都已经做到。</aside>
+    </section>
+
+    <section class="slide" data-title="附录：数据核对" data-section="附录 B" data-tone="green">
+      <div class="slide-header">
+        <div><p class="eyebrow">Appendix B</p><h2>年报原文核对：金额能对到分</h2></div>
+        <span class="section-chip">A2 / Verification</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <article class="card">
+            <h3>贵州茅台 2023 年</h3>
+            <table class="compact-table"><tbody><tr><td>净利润</td><td class="num">77,521,476,277.80</td><td><span class="verdict">一致</span></td></tr><tr><td>经营现金流</td><td class="num">66,593,247,721.09</td><td><span class="verdict">一致</span></td></tr><tr><td>2023 年末总资产</td><td class="num">272,699,660,092.25</td><td><span class="verdict">一致</span></td></tr><tr><td>2022 年末总资产</td><td class="num">差异 0.053%</td><td><span class="verdict neutral">追溯调整</span></td></tr></tbody></table>
+          </article>
+          <article class="card cyan">
+            <h3>亿嘉和 2021 年</h3>
+            <table class="compact-table"><tbody><tr><td>净利润</td><td class="num">483,610,506.19</td><td><span class="verdict">一致</span></td></tr><tr><td>经营现金流</td><td class="num">−10,710,546.33</td><td><span class="verdict">一致</span></td></tr><tr><td>2021 年末总资产</td><td class="num">3,372,484,940.47</td><td><span class="verdict">一致</span></td></tr><tr><td>2021 年末应收账款</td><td class="num">757,164,778.83</td><td><span class="verdict">一致</span></td></tr></tbody></table>
+          </article>
+        </div>
+        <p class="body-copy" style="margin:2.8% auto 0;max-width:80%;text-align:center">唯一不一致来自比较期的追溯调整；面板统一使用接口返回的调整后数，并作为已知偏差披露。</p>
+      </div>
+      <div class="slide-footer"><span>核对方法：年报 PDF 金额字符串逐页检索 + 人工比对</span><span class="footer-mark">VERIFIED TO CENTS</span></div>
+      <aside class="speaker-note"><b>答疑用：</b>接口返回的流量项和当年存量项都精确到分。茅台上一年总资产差异来自新年报比较栏的追溯调整，方向和金额均已查明。</aside>
+    </section>
+
+    <section class="slide" data-title="附录：完整候选清单" data-section="附录 C">
+      <div class="slide-header">
+        <div><p class="eyebrow">Appendix C</p><h2>候选公司清单与取舍</h2></div>
+        <span class="section-chip">A3 / Screening log</span>
+      </div>
+      <div class="slide-body">
+        <table class="compact-table" aria-label="候选公司清单">
+          <thead><tr><th>公司</th><th>t</th><th class="num">E</th><th class="num">CF</th><th class="num">ACC</th><th class="num">gAR</th><th class="num">gREV</th><th>取舍</th></tr></thead>
+          <tbody>
+            <tr><td>*ST威领</td><td>2022</td><td class="num">.109</td><td class="num">.021</td><td class="num">.087</td><td class="num">.288</td><td class="num">4.180</td><td>收入基数崩塌</td></tr>
+            <tr><td>蓝海华腾</td><td>2016</td><td class="num">.226</td><td class="num">.067</td><td class="num">.159</td><td class="num">.538</td><td class="num">1.188</td><td>收入增速高于应收</td></tr>
+            <tr><td>智云股份</td><td>2016</td><td class="num">.042</td><td class="num">−.070</td><td class="num">.111</td><td class="num">.356</td><td class="num">.430</td><td>t 期盈余过低</td></tr>
+            <tr><td>宏英智能</td><td>2020</td><td class="num">.299</td><td class="num">.216</td><td class="num">.178</td><td class="num">1.142</td><td class="num">.604</td><td>上市前年度</td></tr>
+            <tr><td>宁波东力</td><td>2020</td><td class="num">.299</td><td class="num">.155</td><td class="num">.254</td><td class="num">.184</td><td class="num">.213</td><td>高应计另有来源</td></tr>
+            <tr><td>思林杰</td><td>2020</td><td class="num">.273</td><td class="num">.063</td><td class="num">.209</td><td class="num">1.176</td><td class="num">.591</td><td>备选；上市前年度</td></tr>
+            <tr class="highlight"><td><b>亿嘉和</b></td><td>2021</td><td class="num"><b>.181</b></td><td class="num"><b>−.004</b></td><td class="num"><b>.185</b></td><td class="num"><b>1.277</b></td><td class="num"><b>.278</b></td><td><b>入选</b></td></tr>
+            <tr><td>智立方</td><td>2021</td><td class="num">.282</td><td class="num">.031</td><td class="num">.272</td><td class="num">1.152</td><td class="num">.552</td><td>上市前；后续仍为正</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="slide-footer"><span>按 E_t − E_t+3 由大到小；同一公司只保留信号最强一年</span><span class="footer-mark">8 CANDIDATES</span></div>
+      <aside class="speaker-note"><b>答疑用：</b>这里保留了完整 8 家候选和核心变量。如果被问“是否主观挑选”，说明量化筛选先行，取舍只是在候选内比较机制是否清楚，并留下了每个放弃理由。</aside>
+    </section>
+
+    <section class="slide" data-title="附录：拓展与复现" data-section="附录 D" data-tone="gold">
+      <div class="slide-header">
+        <div><p class="eyebrow">Appendix D</p><h2>拓展模型、替代度量与复现信息</h2></div>
+        <span class="section-chip">A4 / Reproducibility</span>
+      </div>
+      <div class="slide-body">
+        <div class="split-43">
+          <article class="card">
+            <h3>拓展模型</h3>
+            <p class="body-copy" style="font-family:Georgia,serif;font-size:clamp(12px,1.12vw,18px)">E<sub>t+h</sub> = α + β<sub>C</sub>CF<sub>t</sub> + β<sub>A</sub>ACC<sub>t</sub> + γ<sub>1</sub>ΔAR<sub>t</sub> + γ<sub>2</sub>(ACC<sub>t</sub>×ΔAR<sub>t</sub>) + FE + ε</p>
+            <table class="compact-table"><thead><tr><th>替代度量</th><th>h=1</th><th>h=2</th><th>h=3</th></tr></thead><tbody><tr><td>ACC×ΔAR</td><td>+.926***</td><td>+.803**</td><td>+.399</td></tr><tr><td>ACC×D(gAR&gt;gREV)</td><td>+.108**</td><td>+.070*</td><td>−.032</td></tr><tr><td>ACC×D(ΔAR 前10%)</td><td>+.164***</td><td>+.086</td><td>+.064</td></tr></tbody></table>
+          </article>
+          <div style="display:grid;gap:1.6%">
+            <article class="card cyan"><h3>复现环境</h3><p class="small">Python 3.11 · pandas 3.0 · statsmodels 0.14 · 无随机抽样</p></article>
+            <article class="card"><h3>关键脚本</h3><p class="small">fetch_data.py → build_panel.py → screen.py → run_regs.py → verify_moutai.py</p></article>
+            <article class="card gold"><h3>分工</h3><p class="small">取数变量：楚慧凌 · 回归稳健性：吴越<br>案例核对：汪舒婷 · 方案统稿：毛静玲</p></article>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer"><span>全部代码与中间数据随作业提交</span><span class="footer-mark">REPRODUCIBLE</span></div>
+      <aside class="speaker-note"><b>答疑用：</b>替代度量没有改变短期为正的方向，因此不是单一 ΔAR 连续变量设定造成的偶然。代码运行没有抽样或自助法，结果是确定性的。</aside>
+    </section>
+  </main>
+
+  <div class="notes-panel" id="notesPanel" aria-live="polite"></div>
+  <div class="slide-counter" id="slideCounter">01 / 18</div>
+  <div class="controls" aria-label="演示控制">
+    <button class="control-btn" id="prevBtn" aria-label="上一页" title="上一页（←）">←</button>
+    <button class="control-btn" id="overviewBtn" aria-label="总览" title="总览（O）">▦</button>
+    <button class="control-btn" id="notesBtn" aria-label="讲稿" title="讲稿（N）">N</button>
+    <button class="control-btn" id="fullscreenBtn" aria-label="全屏" title="全屏（F）">⛶</button>
+    <button class="control-btn" id="nextBtn" aria-label="下一页" title="下一页（→ / 空格）">→</button>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+  <div class="toast" id="toast">→ / 空格翻页 · F 全屏 · N 讲稿 · O 总览 · ? 帮助</div>
+
+  <div class="modal" id="overviewModal" role="dialog" aria-modal="true" aria-label="幻灯片总览">
+    <div class="modal-card"><h3>幻灯片总览</h3><div class="overview-grid" id="overviewGrid"></div></div>
+  </div>
+  <div class="modal" id="helpModal" role="dialog" aria-modal="true" aria-label="快捷键帮助">
+    <div class="modal-card">
+      <h3>演示快捷键</h3>
+      <div class="help-grid">
+        <div class="shortcut"><span>下一页</span><kbd>→ / Space</kbd></div><div class="shortcut"><span>上一页</span><kbd>←</kbd></div>
+        <div class="shortcut"><span>全屏</span><kbd>F</kbd></div><div class="shortcut"><span>讲稿提示</span><kbd>N</kbd></div>
+        <div class="shortcut"><span>幻灯片总览</span><kbd>O</kbd></div><div class="shortcut"><span>首 / 尾页</span><kbd>Home / End</kbd></div>
+        <div class="shortcut"><span>打印 / 导出 PDF</span><kbd>Ctrl + P</kbd></div><div class="shortcut"><span>关闭浮层</span><kbd>Esc</kbd></div>
+      </div>
+      <p class="small" style="margin-top:1.4rem">提示：投屏前按 F 进入全屏。附录页不必顺序播放，提问时按 O 快速跳转。</p>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const slides = [...document.querySelectorAll('.slide')];
+      const counter = document.getElementById('slideCounter');
+      const progress = document.getElementById('progressBar');
+      const notesPanel = document.getElementById('notesPanel');
+      const overviewModal = document.getElementById('overviewModal');
+      const helpModal = document.getElementById('helpModal');
+      const overviewGrid = document.getElementById('overviewGrid');
+      const toast = document.getElementById('toast');
+      let index = Math.max(0, Math.min(slides.length - 1, Number((location.hash.match(/slide=(\d+)/) || [])[1] || 1) - 1));
+      let touchStartX = 0;
+
+      function pad(n) { return String(n).padStart(2, '0'); }
+      function currentNote() {
+        const note = slides[index].querySelector('.speaker-note');
+        notesPanel.innerHTML = note ? note.innerHTML : '本页没有讲稿提示。';
+      }
+      function show(next, push = true) {
+        index = Math.max(0, Math.min(slides.length - 1, next));
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+          slide.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+        });
+        counter.textContent = `${pad(index + 1)} / ${pad(slides.length)}`;
+        progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+        document.title = `${slides[index].dataset.title}｜利润能持续吗`;
+        currentNote();
+        updateOverview();
+        if (push) history.replaceState(null, '', `#slide=${index + 1}`);
+      }
+      function next() { show(index + 1); }
+      function prev() { show(index - 1); }
+      function toggleModal(modal) {
+        const open = !modal.classList.contains('open');
+        [overviewModal, helpModal].forEach(m => m.classList.remove('open'));
+        if (open) modal.classList.add('open');
+      }
+      function closeModals() { overviewModal.classList.remove('open'); helpModal.classList.remove('open'); }
+      async function toggleFullscreen() {
+        try {
+          if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
+          else await document.exitFullscreen();
+        } catch (_) { /* Browser may block fullscreen on local files. */ }
+      }
+      function updateOverview() {
+        [...overviewGrid.children].forEach((item, i) => item.classList.toggle('current', i === index));
+      }
+
+      slides.forEach((slide, i) => {
+        const button = document.createElement('button');
+        button.className = 'overview-item';
+        button.innerHTML = `<small>${pad(i + 1)} · ${slide.dataset.section || ''}</small><strong>${slide.dataset.title}</strong>`;
+        button.addEventListener('click', () => { show(i); closeModals(); });
+        overviewGrid.appendChild(button);
+      });
+
+      document.getElementById('nextBtn').addEventListener('click', next);
+      document.getElementById('prevBtn').addEventListener('click', prev);
+      document.getElementById('overviewBtn').addEventListener('click', () => toggleModal(overviewModal));
+      document.getElementById('notesBtn').addEventListener('click', () => document.body.classList.toggle('notes-on'));
+      document.getElementById('fullscreenBtn').addEventListener('click', toggleFullscreen);
+      [overviewModal, helpModal].forEach(modal => modal.addEventListener('click', e => { if (e.target === modal) closeModals(); }));
+
+      window.addEventListener('keydown', e => {
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        if (e.key === 'Escape') { closeModals(); document.body.classList.remove('notes-on'); return; }
+        if (overviewModal.classList.contains('open') || helpModal.classList.contains('open')) return;
+        if (['ArrowRight', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); next(); }
+        else if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); prev(); }
+        else if (e.key === 'Home') { e.preventDefault(); show(0); }
+        else if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+        else if (e.key.toLowerCase() === 'f') toggleFullscreen();
+        else if (e.key.toLowerCase() === 'n') document.body.classList.toggle('notes-on');
+        else if (e.key.toLowerCase() === 'o') toggleModal(overviewModal);
+        else if (e.key === '?' || e.key === '/') toggleModal(helpModal);
+      });
+
+      window.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive:true});
+      window.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(dx) > 50) dx < 0 ? next() : prev();
+      }, {passive:true});
+      window.addEventListener('hashchange', () => {
+        const n = Number((location.hash.match(/slide=(\d+)/) || [])[1]);
+        if (n) show(n - 1, false);
+      });
+
+      show(index, false);
+      requestAnimationFrame(() => {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 5200);
+      });
+    })();
+  </script>
+</body>
+</html>
